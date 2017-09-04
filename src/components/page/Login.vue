@@ -20,6 +20,8 @@
 
 <script>
     import md5 from 'js-md5';
+    import {mapGetters} from 'vuex'
+
     export default {
         data: function(){
             return {
@@ -42,8 +44,25 @@
                 const self = this;
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
-                        localStorage.setItem('ms_username',self.ruleForm.username);
-                        self.$router.push('/readme');
+                        this.$axios.get('/userlist?_id=' + self.ruleForm.username + "&pw=" + md5(self.ruleForm.password))
+                        .then(function (response) {
+                            if (response.data.length > 0) {
+//                                self.$store.commit('login', response.data.user);
+//                                self.$router.push('/readme');
+                                self.$alert('登录成功', '提示', {
+                                    confirmButtonText: '确定'
+                                });
+                            } else {
+                                self.$alert('用户名或密码错误', '错误', {
+                                    confirmButtonText: '确定'
+                                });
+                            }
+                        })
+                        .catch(function (error) {
+                            self.$alert(error, '错误', {
+                                confirmButtonText: '确定'
+                            });
+                        });
                     } else {
                         console.log('error submit!!');
                         return false;
