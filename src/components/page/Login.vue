@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrap">
-        <div class="ms-title">后台管理系统</div>
+        <div class="ms-title">数据组临时表备案系统</div>
         <div class="ms-login">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
                 <el-form-item prop="username">
@@ -12,18 +12,19 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
-                <p style="font-size:12px;line-height:30px;color:#999;">Tips : 用户名和密码随便填。</p>
+                <p style="font-size:12px;line-height:30px;color:#999;">Tips : 用户名是邮箱前缀，默认密码123456。</p>
             </el-form>
         </div>
     </div>
 </template>
 
 <script>
+    import md5 from 'js-md5';
     export default {
         data: function(){
             return {
                 ruleForm: {
-                    username: '',
+                    username: md5('123456'),
                     password: ''
                 },
                 rules: {
