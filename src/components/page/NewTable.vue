@@ -7,8 +7,8 @@
             </el-breadcrumb>
         </div>
         <div class="form-box">
-            <el-form ref="form" :model="form" label-width="80px">
-                <el-form-item label="临时表名">
+            <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+                <el-form-item prop="tableExp" label="临时表名">
                     <el-input v-model="form.tableExp" placeholder="支持正则表达式，如：^tmp.user_tmp_(.*)$"></el-input>
                 </el-form-item>
                 <el-form-item label="测试">
@@ -22,12 +22,12 @@
                         </el-form-item>
                     </el-col>
                 </el-form-item>
-                <el-form-item label="过期时间">
+                <el-form-item prop="expiredDate" label="过期时间">
                     <el-col :span="11">
                         <el-date-picker type="date" placeholder="过期后表被删除" v-model="form.expiredDate" style="width: 100%;"></el-date-picker>
                     </el-col>
                 </el-form-item>
-                <el-form-item label="备注">
+                <el-form-item prop="desc" label="备注">
                     <el-input type="textarea" :rows="4" v-model="form.desc"></el-input>
                 </el-form-item>
                 <el-form-item>
@@ -49,12 +49,29 @@
                     testName: '',
                     expiredDate: '',
                     desc: ''
+                },
+                rules: {
+                    tableExp: [
+                        { required: true, message: '请输入表名', trigger: 'blur' },
+                    ],
+                    expiredDate: [
+                        { type: 'date', required: true, message: '请选择过期时间', trigger: 'change' }
+                    ],
+                    desc: [
+                        { required: true, message: '请填写备注', trigger: 'blur' }
+                    ]
                 }
             }
         },
         methods: {
             onSubmit() {
-                this.$message.success('提交成功！');
+                this.$refs['form'].validate((valid) => {
+                    if (valid) {
+                        this.$message.success('验证成功！');
+                    } else {
+                        return false;
+                    }
+                });
             },
             onCancel(){
                 this.$router.push('/tableList');
