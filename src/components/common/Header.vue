@@ -70,7 +70,4 @@
         height:32px;
         border-radius: 50%;
     }
-    .el-dropdown-menu__item{
-        text-align: center;
-    }
 </style>

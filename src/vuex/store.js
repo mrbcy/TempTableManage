@@ -15,19 +15,22 @@ const state = {
             _id : "0001",
             tableExp : "^tmp.user_tmp_(.*)$",
             userId : "admin",
-            expiredDate : "2019-08-10T16:00:00.000Z"
+            expiredDate : "2019-08-10T16:00:00.000Z",
+            desc : "每天更新的用户表"
         },
         {
             _id : "0002",
             tableExp : "^tmp.cy_for_save",
             userId : "chenyang",
-            expiredDate : "2017-09-10T16:00:00.000Z"
+            expiredDate : "2017-09-10T16:00:00.000Z",
+            desc : "开发用的测试表1"
         },
         {
             _id : "0003",
             tableExp : "^tmp.xx_for_save_02",
             userId : "xuexin",
-            expiredDate : "2017-09-10T16:00:00.000Z"
+            expiredDate : "2017-09-10T16:00:00.000Z",
+            desc : "开发用的测试表2"
         }
     ],
     currentUser:{}

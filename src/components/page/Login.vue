@@ -28,8 +28,8 @@
         data: function(){
             return {
                 ruleForm: {
-                    username: md5('123456'),
-                    password: ''
+                    username: 'admin',
+                    password: 'admin'
                 },
                 rules: {
                     username: [

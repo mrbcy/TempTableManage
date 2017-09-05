@@ -2,18 +2,20 @@
     <div class="table">
 
         <div class="handle-box">
-            <el-button type="success" icon="plus" class="handle-del mr10" @click="">新的备案</el-button>
-            <el-input v-model="search_kw" placeholder="用户名或表名关键字" class="handle-input mr10"></el-input>
+            <el-button type="success" icon="plus" class="handle-del mr10" @click="newTable">新的备案</el-button>
+            <el-input v-model="search_kw" placeholder="用户名、表名或备注关键字" class="handle-input mr10"></el-input>
             <el-button type="primary" icon="search" >搜索</el-button>
         </div>
         <el-table :data="filteredTableList" border style="width: 100%" ref="multipleTable">
-            <el-table-column prop="tableExp" label="表名(正则)" width="360">
+            <el-table-column prop="tableExp" label="表名(正则)" width="260">
             </el-table-column>
-            <el-table-column prop="userId" label="用户名" width="150">
+            <el-table-column prop="userId" label="用户名" width="120">
             </el-table-column>
-            <el-table-column prop="expiredDate" label="过期时间">
+            <el-table-column prop="expiredDate" label="过期时间" :formatter="dateFormatter">
             </el-table-column>
-            <el-table-column label="操作" width="180">
+            <el-table-column prop="desc" label="备注" width="240">
+            </el-table-column>
+            <el-table-column label="操作" width="150">
                 <template scope="scope">
                     <el-button size="small"
                             @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -29,6 +31,7 @@
 <script>
     import {mapGetters} from 'vuex'
     import _ from 'underscore'
+    import {formatDate} from '../../plugins/date'
 
     export default {
         data() {
@@ -40,7 +43,7 @@
             filteredTableList: function () {
                 let list = [];
                 for(var i = 0; i < this.tableList.length; i++){
-                    if(this.doAuthFilter(this.tableList[i])){
+                    if(this.doAuthFilter(this.tableList[i]) && this.doSearchFilter(this.tableList[i])){
                         list.push(this.tableList[i]);
                     }
                 }
@@ -48,6 +51,9 @@
             }
         }),
         methods: {
+            newTable(){
+                this.$router.push('/newTable');
+            },
             handleEdit(index, row){
 
             },
@@ -63,6 +69,22 @@
                     return true;
                 }
                 return false;
+            },
+            doSearchFilter(table){
+                if(!this.search_kw.trim()){
+                    return true;
+                }
+
+                if(table.tableExp.indexOf(this.search_kw)>=0
+                    || table.userId.indexOf(this.search_kw)>=0
+                    || table.desc.indexOf(this.search_kw)>=0){
+                    return true;
+                }
+                return false;
+            },
+            dateFormatter(row, column){
+                var d = new Date(row.expiredDate);
+                return formatDate(d, 'yyyy-MM-dd');
             }
         }
     }

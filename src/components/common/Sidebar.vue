@@ -32,13 +32,13 @@
                 items: [
                     {
                         icon: 'el-icon-date',
-                        index: 'tableList',
+                        index: '/tableList',
                         title: '临时表备案',
                         role: ['user']
                     },
                     {
                         icon: 'el-icon-upload',
-                        index: 'userList',
+                        index: '/userList',
                         title: '用户管理',
                         role: ['user', 'admin']
                     }

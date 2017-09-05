@@ -67,6 +67,11 @@ const router = new Router({
                     meta: { role: ['user'] }
                 },
                 {
+                    path: '/newTable',
+                    component: resolve => require(['../components/page/newTable.vue'], resolve),
+                    meta: { role: ['user'] }
+                },
+                {
                     path: '/userList',
                     component: resolve => require(['../components/page/BaseForm.vue'], resolve),
                     meta: { role: ['user','admin'] }
@@ -94,16 +99,16 @@ router.beforeEach((to, from, next) => {
     if (!user || !user._id) {
         return next({path: '/login'})
     }
-    console.log(to);
+    // console.log(to);
 
-    // let permission = router.app.hasPermission(user.role, to.meta.role);
-    //
-    // if(!permission){
-    //     // 没找到要求的权限
-    //     router.app.$message.error('没有权限，请登录后重试');
-    //     return next('/login');
-    //
-    // }
+    let permission = router.app.hasPermission(user.role, to.meta.role);
+
+    if(!permission){
+        // 没找到要求的权限
+        router.app.$message.error('没有权限，请登录后重试');
+        return next('/login');
+
+    }
     next(); // 有所有要求的权限
 
 
