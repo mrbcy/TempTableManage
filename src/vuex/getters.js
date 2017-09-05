@@ -3,5 +3,6 @@
  */
 
 export default {
-    getCurrentUser:state => state.currentUser
+    getCurrentUser:state => state.currentUser,
+    getTableList:state => state.tableList
 }

@@ -10,16 +10,24 @@ import mutations from './mutations'
 
 Vue.use(Vuex)
 const state = {
-    userlist : [
+    tableList : [
         {
-            _id : "admin",
-            pw : "21232f297a57a5a743894a0e4a801fc3",
-            role : "admin"
+            _id : "0001",
+            tableExp : "^tmp.user_tmp_(.*)$",
+            userId : "admin",
+            expiredDate : "2019-08-10T16:00:00.000Z"
         },
         {
-            _id : "chenyang",
-            pw : "e10adc3949ba59abbe56e057f20f883e",
-            role : "user"
+            _id : "0002",
+            tableExp : "^tmp.cy_for_save",
+            userId : "chenyang",
+            expiredDate : "2017-09-10T16:00:00.000Z"
+        },
+        {
+            _id : "0003",
+            tableExp : "^tmp.xx_for_save_02",
+            userId : "xuexin",
+            expiredDate : "2017-09-10T16:00:00.000Z"
         }
     ],
     currentUser:{}

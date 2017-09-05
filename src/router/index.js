@@ -63,7 +63,7 @@ const router = new Router({
             children: [
                 {
                     path: '/',
-                    component: resolve => require(['../components/page/Readme.vue'], resolve),
+                    component: resolve => require(['../components/page/TableList.vue'], resolve),
                     meta: { role: ['user'] }
                 },
                 {
