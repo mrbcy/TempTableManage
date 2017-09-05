@@ -10,7 +10,6 @@ import mutations from './mutations'
 
 Vue.use(Vuex)
 const state = {
-    baseurl : "http://localhost:3000",
     userlist : [
         {
             _id : "admin",

@@ -21,6 +21,8 @@
 <script>
     import md5 from 'js-md5';
     import {mapGetters} from 'vuex'
+    import {mapActions} from 'vuex'
+    import _ from 'underscore'
 
     export default {
         data: function(){
@@ -39,7 +41,7 @@
                 }
             }
         },
-        methods: {
+        methods: _.extend({},mapActions(['userLogin']), {
             submitForm(formName) {
                 const self = this;
                 self.$refs[formName].validate((valid) => {
@@ -47,21 +49,15 @@
                         this.$axios.get('/userlist?_id=' + self.ruleForm.username + "&pw=" + md5(self.ruleForm.password))
                         .then(function (response) {
                             if (response.data.length > 0) {
-//                                self.$store.commit('login', response.data.user);
-//                                self.$router.push('/readme');
-                                self.$alert('登录成功', '提示', {
-                                    confirmButtonText: '确定'
-                                });
+                                self.userLogin(response.data[0]);
+                                self.$message.success('登录成功！');
+                                self.$router.push('/readme');
                             } else {
-                                self.$alert('用户名或密码错误', '错误', {
-                                    confirmButtonText: '确定'
-                                });
+                                self.$message.error('用户名或密码错误，如果遗忘请联系管理员');
                             }
                         })
                         .catch(function (error) {
-                            self.$alert(error, '错误', {
-                                confirmButtonText: '确定'
-                            });
+                            self.$message.error('登录失败，请检查网络后重试');
                         });
                     } else {
                         console.log('error submit!!');
@@ -69,7 +65,7 @@
                     }
                 });
             }
-        }
+        }),
     }
 </script>
 
