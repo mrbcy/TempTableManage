@@ -8,12 +8,14 @@ import 'element-ui/lib/theme-default/index.css';    // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
 import "babel-polyfill";
 import store from './vuex/store'
+import Auth from './plugins/auth'
 
 var instance = axios.create({
     baseURL: 'http://localhost:3000'
 });
 
 Vue.use(ElementUI);
+Vue.use(Auth);
 Vue.prototype.$axios = instance;
 Vue.prototype.$qs = qs;
 new Vue({

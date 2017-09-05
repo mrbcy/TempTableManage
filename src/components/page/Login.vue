@@ -51,7 +51,7 @@
                             if (response.data.length > 0) {
                                 self.userLogin(response.data[0]);
                                 self.$message.success('登录成功！');
-                                self.$router.push('/readme');
+                                self.$router.push('/tableList');
                             } else {
                                 self.$message.error('用户名或密码错误，如果遗忘请联系管理员');
                             }

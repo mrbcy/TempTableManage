@@ -21,7 +21,8 @@ const state = {
             pw : "e10adc3949ba59abbe56e057f20f883e",
             role : "user"
         }
-    ]
+    ],
+    currentUser:{}
 };
 
 export default new Vuex.Store({

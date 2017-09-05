@@ -1,40 +1,36 @@
 <template>
     <div class="header">
-        <div class="logo">后台管理系统</div>
+        <div class="logo">数据组临时表备案系统</div>
         <div class="user-info">
             <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link">
-                    <img class="user-logo" src="../../../static/img/img.jpg">
-                    {{username}}
+                    <img class="user-logo" src="../../../static/img/favicon.png">
+                    {{currentUser._id}}
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="loginout">退出</el-dropdown-item>
+                    <el-dropdown-item command="logout">退出</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
     </div>
 </template>
 <script>
+    import {mapGetters} from 'vuex'
+    import {mapActions} from 'vuex'
+    import _ from 'underscore'
+
     export default {
-        data() {
-            return {
-                name: 'linxin'
-            }
-        },
-        computed:{
-            username(){
-                let username = localStorage.getItem('ms_username');
-                return username ? username : this.name;
-            }
-        },
-        methods:{
+        computed: mapGetters({
+            currentUser: 'getCurrentUser'
+        }),
+        methods: _.extend({},mapActions(['userLogout']),{
             handleCommand(command) {
-                if(command == 'loginout'){
-                    localStorage.removeItem('ms_username')
+                if(command === 'logout'){
+                    this.userLogout();
                     this.$router.push('/login');
                 }
             }
-        }
+        })
     }
 </script>
 <style scoped>
@@ -68,10 +64,10 @@
     }
     .user-info .user-logo{
         position: absolute;
-        left:0;
-        top:15px;
-        width:40px;
-        height:40px;
+        left:6px;
+        top:18px;
+        width:32px;
+        height:32px;
         border-radius: 50%;
     }
     .el-dropdown-menu__item{
