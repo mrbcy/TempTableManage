@@ -10,5 +10,8 @@ export default {
     },
     [types.USER_LOGOUT](state){
         state.currentUser = {};
+    },
+    [types.POPULATE_TABLE_LISTS](state,lists){
+        state.tableList = lists;
     }
 }

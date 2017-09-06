@@ -11,9 +11,9 @@
             </el-table-column>
             <el-table-column prop="userId" label="用户名" width="120">
             </el-table-column>
-            <el-table-column prop="expiredDate" label="过期时间" :formatter="dateFormatter">
+            <el-table-column prop="expiredDate" label="过期时间" :formatter="dateFormatter" width="120">
             </el-table-column>
-            <el-table-column prop="desc" label="备注" width="240">
+            <el-table-column prop="desc" label="备注">
             </el-table-column>
             <el-table-column label="操作" width="150">
                 <template scope="scope">
@@ -30,6 +30,7 @@
 
 <script>
     import {mapGetters} from 'vuex'
+    import {mapActions} from 'vuex'
     import _ from 'underscore'
     import {formatDate} from '../../plugins/date'
 
@@ -50,7 +51,7 @@
                 return list;
             }
         }),
-        methods: {
+        methods: _.extend({}, mapActions(['populateTableLists']) ,{
             newTable(){
                 this.$router.push('/newTable');
             },
@@ -86,6 +87,13 @@
                 var d = new Date(row.expiredDate);
                 return formatDate(d, 'yyyy-MM-dd');
             }
+        }),
+        mounted(){
+            this.populateTableLists().then(response => {
+    //                this.$message.success('读取埋点列表成功！');
+            }, error => {
+                this.$message.error('加载埋点列表失败，请检查网络！');
+            })
         }
     }
 </script>

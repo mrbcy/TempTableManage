@@ -46,7 +46,7 @@
                 const self = this;
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$axios.get('/userlist?_id=' + self.ruleForm.username + "&pw=" + md5(self.ruleForm.password))
+                        this.$axios.get('/userList?_id=' + self.ruleForm.username + "&pw=" + md5(self.ruleForm.password))
                         .then(function (response) {
                             if (response.data.length > 0) {
                                 self.userLogin(response.data[0]);
