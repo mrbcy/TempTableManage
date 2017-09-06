@@ -8,23 +8,20 @@
         </div>
         <div class="form-box">
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                <el-form-item prop="tableExp" label="临时表名">
-                    <el-input v-model="form.tableExp" placeholder="支持正则表达式，如：^tmp.user_tmp_(.*)$"></el-input>
-                </el-form-item>
-                <el-form-item label="测试">
+                <el-form-item label="临时表名" prop="tableExp">
                     <el-col :span="19">
-                        <el-input v-model="form.testName" placeholder="输入想保留的表名"></el-input>
+                        <el-input v-model="form.tableExp" placeholder="支持Python正则表达式，如：^tmp.user_tmp_(.*)$"></el-input>
                     </el-col>
                     <el-col class="line" :span="1">&nbsp;</el-col>
                     <el-col :span="2">
                         <el-form-item>
-                            <el-button type="success" @click="">保留测试</el-button>
+                            <el-button type="danger" @click="gotoTest">测试</el-button>
                         </el-form-item>
                     </el-col>
                 </el-form-item>
                 <el-form-item prop="expiredDate" label="过期时间">
                     <el-col :span="11">
-                        <el-date-picker type="date" placeholder="过期后表被删除" v-model="form.expiredDate" style="width: 100%;"></el-date-picker>
+                        <el-date-picker type="date" placeholder="过期后表会被自动删除" v-model="form.expiredDate" style="width: 100%;"></el-date-picker>
                     </el-col>
                 </el-form-item>
                 <el-form-item prop="desc" label="备注">
@@ -72,6 +69,10 @@
                         return false;
                     }
                 });
+            },
+            gotoTest(){
+                let url = "http://www.dooccn.com/python3/#id/f7a83644e0ad6f5eb40a99ebbc2bf75b";
+                window.open(url,"_blank");
             },
             onCancel(){
                 this.$router.push('/tableList');
