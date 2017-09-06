@@ -39,9 +39,9 @@
       "desc": "开发用的测试表2"
     },
     {
-      "tableExp": "tmp.cy_ffff_1",
-      "expiredDate": "2017-09-26T16:00:00.000Z",
-      "desc": "添加测试表1",
+      "tableExp": "tmp.cy_ffff_2",
+      "expiredDate": "2017-10-27T16:00:00.000Z",
+      "desc": "添加测试表2",
       "userId": "admin",
       "_id": "Skt-w96t-"
     }

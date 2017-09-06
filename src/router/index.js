@@ -68,7 +68,12 @@ const router = new Router({
                 },
                 {
                     path: '/newTable',
-                    component: resolve => require(['../components/page/newTable.vue'], resolve),
+                    component: resolve => require(['../components/page/NewTable.vue'], resolve),
+                    meta: { role: ['user'] }
+                },
+                {
+                    path: '/editTable/:tableId',
+                    component: resolve => require(['../components/page/EditTable.vue'], resolve),
                     meta: { role: ['user'] }
                 },
                 {
@@ -82,7 +87,7 @@ const router = new Router({
             path: '/404',
             component: resolve => require(['../components/page/404.vue'], resolve),
         },
-        { path: '*', redirect: '/404', hidden: true }
+        // { path: '*', redirect: '/404', hidden: true }
     ]
 })
 

@@ -56,7 +56,7 @@
                 this.$router.push('/newTable');
             },
             handleEdit(index, row){
-
+                this.$router.push('/editTable/' + row._id);
             },
             handleDelete(index, row){
 
