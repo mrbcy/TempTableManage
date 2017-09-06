@@ -25,7 +25,7 @@
                     </el-col>
                 </el-form-item>
                 <el-form-item prop="desc" label="备注">
-                    <el-input type="textarea" :rows="4" v-model="form.desc"></el-input>
+                    <el-input type="textarea" :rows="4" v-model="form.desc" placeholder="请输入备注（至少6个字符）"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">提交</el-button>
@@ -38,14 +38,17 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
+    import _ from 'underscore'
+
     export default {
         data: function(){
             return {
                 form: {
                     tableExp: '',
-                    testName: '',
                     expiredDate: '',
-                    desc: ''
+                    desc: '',
+                    userId: this.$store.state.currentUser._id
                 },
                 rules: {
                     tableExp: [
@@ -55,16 +58,22 @@
                         { type: 'date', required: true, message: '请选择过期时间', trigger: 'change' }
                     ],
                     desc: [
-                        { required: true, message: '请填写备注', trigger: 'blur' }
+                        { required: true, message: '请填写备注', trigger: 'blur' },
+                        { min: 6, message: '客官，请多写一点吧', trigger: 'blur' }
                     ]
                 }
             }
         },
-        methods: {
+        methods: _.extend({},mapActions(['addNewTable']),{
             onSubmit() {
                 this.$refs['form'].validate((valid) => {
                     if (valid) {
-                        this.$message.success('验证成功！');
+                        this.addNewTable(this.form).then(response => {
+                            this.$message.success('添加备案信息成功！');
+                            this.$router.push('/tableList');
+                        }, error => {
+                            this.$message.error('添加备案失败，请检查网络！');
+                        })
                     } else {
                         return false;
                     }
@@ -77,7 +86,7 @@
             onCancel(){
                 this.$router.push('/tableList');
             }
-        }
+        })
     }
 </script>
 
