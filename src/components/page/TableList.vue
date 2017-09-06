@@ -51,7 +51,7 @@
                 return list;
             }
         }),
-        methods: _.extend({}, mapActions(['populateTableLists']) ,{
+        methods: _.extend({}, mapActions(['populateTableLists','deleteTable']) ,{
             newTable(){
                 this.$router.push('/newTable');
             },
@@ -59,7 +59,18 @@
                 this.$router.push('/editTable/' + row._id);
             },
             handleDelete(index, row){
-
+                this.$confirm('此操作将永久删除该备案信息, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.deleteTable(row).then(response => {
+                        this.$message.success('删除备案信息成功！');
+                    }, error => {
+                        this.$message.error('删除备案信息失败，请检查网络！');
+                    })
+                }).catch(() => {
+                });
             },
             doAuthFilter(table){
                 let roles = this.currentUser.role;
