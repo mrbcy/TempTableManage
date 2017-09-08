@@ -78,7 +78,7 @@ const router = new Router({
                 },
                 {
                     path: '/userList',
-                    component: resolve => require(['../components/page/BaseForm.vue'], resolve),
+                    component: resolve => require(['../components/page/UserList.vue'], resolve),
                     meta: { role: ['user','admin'] }
                 },
             ]

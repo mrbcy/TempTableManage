@@ -8,5 +8,6 @@ export default {
     getTableList:state => state.tableList,
     getTableById: (state, getters) =>(_id) => {
         return _.findWhere(state.tableList, {_id: _id})
-    }
+    },
+    getUserList:state => state.userList
 }

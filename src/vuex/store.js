@@ -11,7 +11,24 @@ import mutations from './mutations'
 Vue.use(Vuex)
 const state = {
     tableList : [],
-    currentUser:{}
+    currentUser:{},
+    userList : [
+        {
+            _id: "admin",
+            pw: "21232f297a57a5a743894a0e4a801fc3",
+            role: [
+                "admin",
+                "user"
+            ]
+        },
+        {
+            _id: "chenyang",
+            pw: "e10adc3949ba59abbe56e057f20f883e",
+            role: [
+                "user"
+            ]
+        }
+    ]
 };
 
 export default new Vuex.Store({

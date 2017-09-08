@@ -101,9 +101,8 @@
         }),
         mounted(){
             this.populateTableLists().then(response => {
-    //                this.$message.success('读取埋点列表成功！');
             }, error => {
-                this.$message.error('加载埋点列表失败，请检查网络！');
+                this.$message.error('加载备案信息失败，请检查网络！');
             })
         }
     }
