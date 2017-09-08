@@ -7,6 +7,7 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource);
 let baseURL = "http://localhost:3000/";
 const TableResource = Vue.resource(baseURL + 'tableList{/_id}');
+const UserResource = Vue.resource(baseURL + 'userList{/_id}');
 
 export default {
     fetchTables:() => {
@@ -20,5 +21,17 @@ export default {
     },
     deleteTable:(_id) => {
         return TableResource.remove({_id:_id})
+    },
+    fetchUsers:() => {
+        return UserResource.get()
+    },
+    addNewUser:(data) => {
+        return UserResource.save(data)
+    },
+    updateUser:(data) => {
+        return UserResource.update({_id: data._id}, data)
+    },
+    deleteUser:(_id) => {
+        return UserResource.remove({_id:_id})
     }
 }

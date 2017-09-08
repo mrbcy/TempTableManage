@@ -13,5 +13,8 @@ export default {
     },
     [types.POPULATE_TABLE_LISTS](state,lists){
         state.tableList = lists;
+    },
+    [types.POPULATE_USER_LISTS](state,lists){
+        state.userList = lists;
     }
 }

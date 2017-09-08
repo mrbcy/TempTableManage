@@ -81,6 +81,11 @@ const router = new Router({
                     component: resolve => require(['../components/page/UserList.vue'], resolve),
                     meta: { role: ['user','admin'] }
                 },
+                {
+                    path: '/newUser',
+                    component: resolve => require(['../components/page/NewUser.vue'], resolve),
+                    meta: { role: ['user','admin'] }
+                },
             ]
         },
         {
