@@ -9,5 +9,8 @@ export default {
     getTableById: (state, getters) =>(_id) => {
         return _.findWhere(state.tableList, {_id: _id})
     },
-    getUserList:state => state.userList
+    getUserList:state => state.userList,
+    getUserById: (state, getters) =>(_id) => {
+        return _.findWhere(state.userList, {_id: _id})
+    },
 }

@@ -42,7 +42,7 @@
                 this.$router.push('/newUser');
             },
             handleEdit(index, row){
-//                this.$router.push('/editTable/' + row._id);
+                this.$router.push('/editUser/' + row._id);
             },
             handleDelete(index, row){
                 this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {

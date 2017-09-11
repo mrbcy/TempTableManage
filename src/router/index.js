@@ -86,6 +86,11 @@ const router = new Router({
                     component: resolve => require(['../components/page/NewUser.vue'], resolve),
                     meta: { role: ['user','admin'] }
                 },
+                {
+                    path: '/editUser/:userId',
+                    component: resolve => require(['../components/page/EditUser.vue'], resolve),
+                    meta: { role: ['user','admin'] }
+                },
             ]
         },
         {
