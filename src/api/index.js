@@ -5,7 +5,7 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource);
-let baseURL = "http://localhost:3000/";
+let baseURL = "http://10.8.8.111:3000/";
 const TableResource = Vue.resource(baseURL + 'tableList{/_id}');
 const UserResource = Vue.resource(baseURL + 'userList{/_id}');
 

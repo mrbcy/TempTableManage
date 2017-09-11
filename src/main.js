@@ -11,7 +11,7 @@ import store from './vuex/store'
 import Auth from './plugins/auth'
 
 var instance = axios.create({
-    baseURL: 'http://localhost:3000'
+    baseURL: 'http://10.8.8.111:3000'
 });
 
 Vue.use(ElementUI);
