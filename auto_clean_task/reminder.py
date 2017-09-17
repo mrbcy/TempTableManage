@@ -27,6 +27,13 @@ def func():
     print("正在筛选被保留的临时表...")
     keep_table_names = do_record_filter(valid_records, table_names)
 
+    # 将要删除的临时表写入文件
+    print("正在产生被删除的表名单...")
+    f = open("remove_tables.txt", "w")
+    remove_tables = filter(lambda x: x not in keep_table_names, table_names)
+    f.writelines([line + '\n' for line in remove_tables])
+    f.close()
+
     # 发送提醒
     print("开始发送提醒...")
     send_reminder(keep_table_names)
@@ -37,6 +44,7 @@ def send_reminder(keep_table_names):
     for table_name in keep_table_names:
         text += "- " + table_name + "\n"
     text += "\n其他临时表会在今天下班后被删除。如有需要，[点此立即备案](http://10.8.8.111:8080/TempTable) \n"
+    text += "\n　　 \n\n Tips：看到本消息后创建的临时表今天不会被删除\n"
     msg = {
         "msgtype": "markdown",
         "markdown": {
@@ -46,7 +54,7 @@ def send_reminder(keep_table_names):
     }
     # 开始发送
     headers = {'content-type': 'application/json; charset=utf-8'}
-    url = 'https://oapi.dingtalk.com/robot/send?access_token=6eec158e1e09ef9bd80f3c6fed53b87a7aa2ff3120f7a013d17fdae14c537ad0'
+    url = 'https://oapi.dingtalk.com/robot/send?access_token=46f2744149451ad59f125a9510b8a92f860b710506f02e24c79e5795fc6234e1'
     s = json.dumps(msg)
     r = requests.post(url, data=s, headers = headers)
     print(r.text)
