@@ -43,6 +43,22 @@
 
     export default {
         data: function(){
+            let dateValidator = (rule, value, callback) => {
+                let expiredDate = new Date(this.form.expiredDate);
+                let now = new Date();
+                now.setHours(0);
+                now.setMinutes(0);
+                now.setSeconds(0);
+                let time = expiredDate.getTime() - now.getTime();
+                let day = parseInt(time / (1000 * 60 * 60 * 24));
+                if (day < 0){
+                    callback(new Error("请选择今天或以后的日期"))
+                }else if(day > 366 && !this.hasPermission(this.$store.state.currentUser.role,['admin'])){
+                    callback(new Error("您需要保留的天数太长了，请让管理员帮您添加"))
+                } else {
+                    callback();
+                }
+            };
             return {
                 form: {
                     tableExp: '',
@@ -55,13 +71,15 @@
                         { required: true, message: '请输入表名', trigger: 'blur' },
                     ],
                     expiredDate: [
-                        { type: 'date', required: true, message: '请选择过期时间', trigger: 'change' }
+                        { type: 'date', required: true, message: '请选择过期时间', trigger: 'change' },
+                        { validator: dateValidator, trigger: 'change' }
                     ],
                     desc: [
                         { required: true, message: '请填写备注', trigger: 'blur' },
                         { min: 6, message: '客官，请多写一点吧', trigger: 'blur' }
                     ]
-                }
+                },
+
             }
         },
         methods: _.extend({},mapActions(['addNewTable']),{
